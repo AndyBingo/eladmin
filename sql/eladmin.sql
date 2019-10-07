@@ -640,3 +640,53 @@ CREATE TABLE `visits` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_11aksgq87euk9bcyeesfs4vtp` (`date`)
 ) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+
+------------------------------
+-- Table structure for event
+------------------------------
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime DEFAULT NULL,
+  `event_type` varchar(255) DEFAULT NULL,
+  `device_id` bigint(20) DEFAULT NULL,
+  `img` text DEFAULT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-----------------------------
+-- Schema of device table
+-----------------------------
+DROP TABLE IF EXISTS `device`;
+CREATE TABLE `device` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime DEFAULT NULL,
+  `device_name` varchar (255) DEFAULT NULL,
+  `stream_addr` varchar(255) DEFAULT NULL,
+  `ip_addr` varchar(50) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-----------------------------
+-- Schema of algorithm table
+-----------------------------
+DROP TABLE IF EXISTS `algorithm`;
+CREATE TABLE `algorithm` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `service_url` varchar(255) DEFAULT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-----------------------------
+-- Schema of algorithm table
+-----------------------------
+DROP TABLE IF EXISTS `devices_algorithms`;
+CREATE TABLE `devices_algorithms` (
+  `device_id` bigint(20) NOT NULL COMMENT '设备ID',
+  `algorithm_id` bigint(20) NOT NULL COMMENT '算法ID',
+  PRIMARY KEY (`device_id`,`algorithm_id`) USING BTREE,
+  KEY `FKq4eq273l04bpu4efj0jd0jb98` (`device_id`) USING BTREE,
+  CONSTRAINT `devices_algorithms_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`),
+  CONSTRAINT `devices_algorithms_ibfk_2` FOREIGN KEY (`algorithm_id`) REFERENCES `algorithm` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
