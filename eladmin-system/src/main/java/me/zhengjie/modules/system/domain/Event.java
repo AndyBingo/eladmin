@@ -27,8 +27,9 @@ public class Event implements Serializable {
     @Column(name = "event_type")
     private String eventType;
 
-    @Column(name = "device_id")
-    private Long deviceId;
+    @OneToOne
+    @JoinColumn(name = "device_id")
+    private Device device;
 
     @Column(name = "img")
     private String img;

@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 * @date 2019-10-07
 */
 public interface EventRepository extends JpaRepository<Event, Long>, JpaSpecificationExecutor {
+
 }

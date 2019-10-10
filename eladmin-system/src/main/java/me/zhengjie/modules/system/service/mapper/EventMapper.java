@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 * @author andy
 * @date 2019-10-07
 */
-@Mapper(componentModel = "spring",uses = {},unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",uses = {DeviceMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EventMapper extends EntityMapper<EventDTO, Event> {
 
 }

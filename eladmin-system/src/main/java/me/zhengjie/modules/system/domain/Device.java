@@ -6,6 +6,7 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.Set;
 
 /**
 * @author andy
@@ -32,6 +33,10 @@ public class Device implements Serializable {
 
     @Column(name = "ip_addr")
     private String ipAddr;
+
+    @ManyToMany
+    @JoinTable(name = "devices_algorithms", joinColumns = {@JoinColumn(name = "device_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "algorithm_id",referencedColumnName = "id")})
+    private Set<Algorithm> algorithms;
 
     public void copy(Device source){
         BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
