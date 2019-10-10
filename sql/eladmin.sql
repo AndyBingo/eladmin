@@ -651,7 +651,8 @@ CREATE TABLE `event` (
   `event_type` varchar(255) DEFAULT NULL,
   `device_id` bigint(20) DEFAULT NULL,
   `img` text DEFAULT NULL,
-  PRIMARY KEY(`id`)
+  PRIMARY KEY(`id`),
+  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -----------------------------
