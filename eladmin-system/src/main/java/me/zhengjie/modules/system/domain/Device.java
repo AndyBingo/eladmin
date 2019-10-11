@@ -3,6 +3,8 @@ package me.zhengjie.modules.system.domain;
 import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.io.Serializable;
@@ -22,6 +24,7 @@ public class Device implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @CreationTimestamp
     @Column(name = "create_time")
     private Timestamp createTime;
 

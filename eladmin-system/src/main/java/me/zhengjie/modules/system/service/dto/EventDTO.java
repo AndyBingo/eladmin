@@ -20,6 +20,8 @@ public class EventDTO implements Serializable {
 
     private String eventType;
 
+    private DeviceDTO device;
+
     private Long deviceId;
 
     private String img;

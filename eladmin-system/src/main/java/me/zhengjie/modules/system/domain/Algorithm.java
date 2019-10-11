@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.io.Serializable;
@@ -23,6 +25,7 @@ public class Algorithm implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @CreationTimestamp
     @Column(name = "create_time")
     private Timestamp createTime;
 
