@@ -3,15 +3,13 @@ package me.zhengjie.modules.system.domain;
 import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.io.Serializable;
 
 /**
 * @author andy
-* @date 2019-10-07
+* @date 2019-10-17
 */
 @Entity
 @Data
@@ -23,21 +21,34 @@ public class Event implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @CreationTimestamp
+    // 开始时间
+    @Column(name = "start_time")
+    private Timestamp startTime;
+
+    // 结束时间
+    @Column(name = "end_time")
+    private Timestamp endTime;
+
+    // 创建时间
     @Column(name = "create_time")
     private Timestamp createTime;
 
-    @Column(name = "event_type")
-    private String eventType;
+    // 异常类型
+    @Column(name = "exception")
+    private String exception;
 
+    // 设备ID
     @OneToOne
     @JoinColumn(name = "device_id")
     private Device device;
 
-    @Column(name = "img")
-    private String img;
+    // 状态
+    @Column(name = "status")
+    private String status;
 
-    public void copy(Event source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
-    }
+    @Column(name = "image")
+    private String image;
+
+    @Column(name = "video")
+    private String video;
 }

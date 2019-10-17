@@ -656,7 +656,7 @@ CREATE TABLE `event` (
   `image` varchar(255) DEFAULT NULL,
   `video` varchar(255) DEFAULT NULL,
   PRIMARY KEY(`id`),
-  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
+  CONSTRAINT `eventFKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
 -- Schema of nvr table
@@ -670,7 +670,7 @@ CREATE TABLE `nvr`(
   `user_name` varchar(255) DEFAULT NULL,
   `password`  varchar(255) DEFAULT NULL,
   `channel_count` int DEFAULT NULL,
-  PRIMARY KEY(`id`),
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
 -- Schema of device table
@@ -684,7 +684,7 @@ CREATE TABLE `device` (
   `ip_addr` varchar(50) DEFAULT NULL,
   `nvr_id` bigint(20) NOT NULL,
   PRIMARY KEY(`id`),
-  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`nvr_id`) REFERENCES `nvr` (`id`)
+  CONSTRAINT `deviceFKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`nvr_id`) REFERENCES `nvr` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -----------------------------
@@ -700,7 +700,7 @@ CREATE TABLE `algorithm` (
   `exception` varchar(255) DEFAULT NULL,
   `alarm_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY(`id`),
-  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`alarm_id`) REFERENCES `alarm_policy` (`id`)
+  CONSTRAINT `algorithmFKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`alarm_id`) REFERENCES `alarm_policy` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
 -- Schema of devices_algorithms table
@@ -717,6 +717,7 @@ CREATE TABLE `devices_algorithms` (
 ----------------------------
 -- Schema of alarm_policy
 ----------------------------
+DROP TABLE IF EXISTS `alarm_policy`;
 CREATE TABLE `alarm_policy` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `create_time` datetime DEFAULT NULL,
@@ -735,7 +736,7 @@ DROP TABLE IF EXISTS `algorithms_users`;
 CREATE TABLE `algorithms_users` (
   `algorithm_id` bigint(20) NOT NULL,
   `user_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`algorithm_id`,`algorithm_id`) USING BTREE,
+  PRIMARY KEY (`algorithm_id`,`user_id`) USING BTREE,
   CONSTRAINT `algorithms_users_ibfk_1` FOREIGN KEY (`algorithm_id`) REFERENCES `algorithm` (`id`),
   CONSTRAINT `algorithms_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

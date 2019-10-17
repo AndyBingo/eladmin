@@ -1,8 +1,8 @@
 package me.zhengjie.modules.system.service;
 
-import me.zhengjie.modules.system.domain.Event;
-import me.zhengjie.modules.system.service.dto.EventDTO;
-import me.zhengjie.modules.system.service.dto.EventQueryCriteria;
+import me.zhengjie.modules.system.domain.AlarmPolicy;
+import me.zhengjie.modules.system.service.dto.AlarmPolicyDTO;
+import me.zhengjie.modules.system.service.dto.AlarmPolicyQueryCriteria;
 //import org.springframework.cache.annotation.CacheConfig;
 //import org.springframework.cache.annotation.CacheEvict;
 //import org.springframework.cache.annotation.Cacheable;
@@ -12,8 +12,8 @@ import org.springframework.data.domain.Pageable;
 * @author andy
 * @date 2019-10-17
 */
-//@CacheConfig(cacheNames = "event")
-public interface EventService {
+//@CacheConfig(cacheNames = "alarmPolicy")
+public interface AlarmPolicyService {
 
     /**
     * queryAll 分页
@@ -22,7 +22,7 @@ public interface EventService {
     * @return
     */
     //@Cacheable(keyGenerator = "keyGenerator")
-    Object queryAll(EventQueryCriteria criteria, Pageable pageable);
+    Object queryAll(AlarmPolicyQueryCriteria criteria, Pageable pageable);
 
     /**
     * queryAll 不分页
@@ -30,7 +30,7 @@ public interface EventService {
     * @return
     */
     //@Cacheable(keyGenerator = "keyGenerator")
-    public Object queryAll(EventQueryCriteria criteria);
+    public Object queryAll(AlarmPolicyQueryCriteria criteria);
 
     /**
      * findById
@@ -38,7 +38,7 @@ public interface EventService {
      * @return
      */
     //@Cacheable(key = "#p0")
-    EventDTO findById(Long id);
+    AlarmPolicyDTO findById(Long id);
 
     /**
      * create
@@ -46,14 +46,14 @@ public interface EventService {
      * @return
      */
     //@CacheEvict(allEntries = true)
-    EventDTO create(Event resources);
+    AlarmPolicyDTO create(AlarmPolicy resources);
 
     /**
      * update
      * @param resources
      */
     //@CacheEvict(allEntries = true)
-    void update(Event resources);
+    void update(AlarmPolicy resources);
 
     /**
      * delete

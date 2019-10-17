@@ -1,8 +1,8 @@
 package me.zhengjie.modules.system.service.mapper;
 
 import me.zhengjie.mapper.EntityMapper;
-import me.zhengjie.modules.system.domain.Algorithm;
-import me.zhengjie.modules.system.service.dto.AlgorithmDTO;
+import me.zhengjie.modules.system.domain.AlarmPolicy;
+import me.zhengjie.modules.system.service.dto.AlarmPolicyDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,6 +11,6 @@ import org.mapstruct.ReportingPolicy;
 * @date 2019-10-17
 */
 @Mapper(componentModel = "spring",uses = {},unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface AlgorithmMapper extends EntityMapper<AlgorithmDTO, Algorithm> {
+public interface AlarmPolicyMapper extends EntityMapper<AlarmPolicyDTO, AlarmPolicy> {
 
 }

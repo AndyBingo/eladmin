@@ -9,9 +9,13 @@ import me.zhengjie.annotation.Query;
 * @date 2019-10-17
 */
 @Data
-public class DeviceQueryCriteria{
+public class AlarmPolicyQueryCriteria{
 
     // 精确
     @Query
-    private String deviceName;
+    private String name;
+
+    // 精确
+    @Query
+    private String alarmManner;
 }

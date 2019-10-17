@@ -1,8 +1,8 @@
 package me.zhengjie.modules.system.service.mapper;
 
 import me.zhengjie.mapper.EntityMapper;
-import me.zhengjie.modules.system.domain.Algorithm;
-import me.zhengjie.modules.system.service.dto.AlgorithmDTO;
+import me.zhengjie.modules.system.domain.Nvr;
+import me.zhengjie.modules.system.service.dto.NvrDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -11,6 +11,6 @@ import org.mapstruct.ReportingPolicy;
 * @date 2019-10-17
 */
 @Mapper(componentModel = "spring",uses = {},unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface AlgorithmMapper extends EntityMapper<AlgorithmDTO, Algorithm> {
+public interface NvrMapper extends EntityMapper<NvrDTO, Nvr> {
 
 }

@@ -1,6 +1,5 @@
 package me.zhengjie.modules.system.service.dto;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.sql.Timestamp;
 import java.io.Serializable;
@@ -8,21 +7,36 @@ import java.io.Serializable;
 
 /**
 * @author andy
-* @date 2019-10-07
+* @date 2019-10-17
 */
 @Data
 public class EventDTO implements Serializable {
 
-    @ApiModelProperty(hidden = true)
     private Long id;
 
+    // 开始时间
+    private Timestamp startTime;
+
+    // 结束时间
+    private Timestamp endTime;
+
+    // 创建时间
     private Timestamp createTime;
 
-    private String eventType;
+    // 异常类型
+    private String exception;
 
-    private DeviceDTO device;
-
+    // 设备ID
     private Long deviceId;
+
+    // 状态
+    private String status;
+
+    private String image;
+
+    private String video;
+
+    private String eventType;
 
     private String img;
 }

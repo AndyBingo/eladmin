@@ -12,7 +12,7 @@ import java.util.Set;
 
 /**
 * @author andy
-* @date 2019-10-07
+* @date 2019-10-17
 */
 @Entity
 @Data
@@ -28,20 +28,24 @@ public class Device implements Serializable {
     @Column(name = "create_time")
     private Timestamp createTime;
 
+    // 设备名称
     @Column(name = "device_name")
     private String deviceName;
 
+    // 流地址
     @Column(name = "stream_addr")
     private String streamAddr;
 
+    // IP地址
     @Column(name = "ip_addr")
     private String ipAddr;
+
+    @OneToOne
+    @JoinColumn(name = "nvr_id",nullable = false)
+    private Nvr nvr;
 
     @ManyToMany
     @JoinTable(name = "devices_algorithms", joinColumns = {@JoinColumn(name = "device_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "algorithm_id",referencedColumnName = "id")})
     private Set<Algorithm> algorithms;
 
-    public void copy(Device source){
-        BeanUtil.copyProperties(source,this, CopyOptions.create().setIgnoreNullValue(true));
-    }
 }
