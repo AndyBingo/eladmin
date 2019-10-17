@@ -647,14 +647,31 @@ CREATE TABLE `visits` (
 DROP TABLE IF EXISTS `event`;
 CREATE TABLE `event` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `event_type` varchar(255) DEFAULT NULL,
+  `exception` varchar(255) DEFAULT NULL,
   `device_id` bigint(20) DEFAULT NULL,
-  `img` text DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
   PRIMARY KEY(`id`),
   CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+-----------------------------
+-- Schema of nvr table
+-----------------------------
+DROP TABLE IF EXISTS `nvr`;
+CREATE TABLE `nvr`(
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `ip_addr`  varchar(255) DEFAULT NULL,
+  `port`  varchar(50) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `password`  varchar(255) DEFAULT NULL,
+  `channel_count` int DEFAULT NULL,
+  PRIMARY KEY(`id`),
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
 -- Schema of device table
 -----------------------------
@@ -665,7 +682,9 @@ CREATE TABLE `device` (
   `device_name` varchar (255) DEFAULT NULL,
   `stream_addr` varchar(255) DEFAULT NULL,
   `ip_addr` varchar(50) DEFAULT NULL,
-  PRIMARY KEY(`id`)
+  `nvr_id` bigint(20) NOT NULL,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`nvr_id`) REFERENCES `nvr` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -----------------------------
@@ -677,17 +696,46 @@ CREATE TABLE `algorithm` (
   `create_time` datetime DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `service_url` varchar(255) DEFAULT NULL,
-  PRIMARY KEY(`id`)
+  `params` varchar(255) DEFAULT NULL,
+  `exception` varchar(255) DEFAULT NULL,
+  `alarm_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY(`id`),
+  CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`alarm_id`) REFERENCES `alarm_policy` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
--- Schema of algorithm table
+-- Schema of devices_algorithms table
 -----------------------------
 DROP TABLE IF EXISTS `devices_algorithms`;
 CREATE TABLE `devices_algorithms` (
   `device_id` bigint(20) NOT NULL COMMENT '设备ID',
   `algorithm_id` bigint(20) NOT NULL COMMENT '算法ID',
   PRIMARY KEY (`device_id`,`algorithm_id`) USING BTREE,
-  KEY `FKq4eq273l04bpu4efj0jd0jb98` (`device_id`) USING BTREE,
   CONSTRAINT `devices_algorithms_ibfk_1` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`),
   CONSTRAINT `devices_algorithms_ibfk_2` FOREIGN KEY (`algorithm_id`) REFERENCES `algorithm` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+----------------------------
+-- Schema of alarm_policy
+----------------------------
+CREATE TABLE `alarm_policy` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `create_time` datetime DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `alarm_manner` varchar(255) DEFAULT NULL, -- 0:text,1:email,2:phone value should be 0,1
+  `threshold` int DEFAULT NULL,
+  `upgrade_alarm_manner` varchar(255) DEFAULT NULL,
+  `alarm_interval` int DEFAULT NULL,
+  PRIMARY KEY(`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-----------------------------
+-- Schema of algorithms_users table
+-----------------------------
+DROP TABLE IF EXISTS `algorithms_users`;
+CREATE TABLE `algorithms_users` (
+  `algorithm_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`algorithm_id`,`algorithm_id`) USING BTREE,
+  CONSTRAINT `algorithms_users_ibfk_1` FOREIGN KEY (`algorithm_id`) REFERENCES `algorithm` (`id`),
+  CONSTRAINT `algorithms_users_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
