@@ -61,7 +61,12 @@ public class NvrServiceImpl implements NvrService {
         Optional<Nvr> optionalNvr = nvrRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalNvr,"Nvr","id",resources.getId());
         Nvr nvr = optionalNvr.get();
-        nvr.copy(resources);
+        nvr.setChannelCount(resources.getChannelCount());
+        nvr.setIpAddr(resources.getIpAddr());
+        nvr.setName(resources.getName());
+        nvr.setPassword(resources.getPassword());
+        nvr.setPort(resources.getPort());
+        nvr.setUserName(resources.getUserName());
         nvrRepository.save(nvr);
     }
 

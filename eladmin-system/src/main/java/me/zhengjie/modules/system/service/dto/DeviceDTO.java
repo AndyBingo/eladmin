@@ -3,6 +3,7 @@ package me.zhengjie.modules.system.service.dto;
 import lombok.Data;
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -26,4 +27,8 @@ public class DeviceDTO implements Serializable {
     private String ipAddr;
 
     private Long nvrId;
+
+    private NvrDTO nvr;
+
+    private Set<AlgorithmDTO> algorithms;
 }

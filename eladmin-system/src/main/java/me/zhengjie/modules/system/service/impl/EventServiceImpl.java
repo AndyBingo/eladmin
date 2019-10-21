@@ -52,6 +52,7 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public EventDTO create(Event resources) {
+        resources.setStatus("未关闭");
         return eventMapper.toDto(eventRepository.save(resources));
     }
 
@@ -61,7 +62,7 @@ public class EventServiceImpl implements EventService {
         Optional<Event> optionalEvent = eventRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalEvent,"Event","id",resources.getId());
         Event event = optionalEvent.get();
-        event.copy(resources);
+        event.setStatus(resources.getStatus());
         eventRepository.save(event);
     }
 

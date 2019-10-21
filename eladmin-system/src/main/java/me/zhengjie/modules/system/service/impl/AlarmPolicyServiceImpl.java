@@ -61,7 +61,12 @@ public class AlarmPolicyServiceImpl implements AlarmPolicyService {
         Optional<AlarmPolicy> optionalAlarmPolicy = alarmPolicyRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalAlarmPolicy,"AlarmPolicy","id",resources.getId());
         AlarmPolicy alarmPolicy = optionalAlarmPolicy.get();
-        alarmPolicy.copy(resources);
+        alarmPolicy.setName(resources.getName());
+        alarmPolicy.setAlarmManner(resources.getAlarmManner());
+        alarmPolicy.setAlarmInterval(resources.getAlarmInterval());
+        alarmPolicy.setAlarmManner(resources.getAlarmManner());
+        alarmPolicy.setThreshold(resources.getThreshold());
+        alarmPolicy.setUpgradeAlarmManner(resources.getUpgradeAlarmManner());
         alarmPolicyRepository.save(alarmPolicy);
     }
 

@@ -11,14 +11,10 @@ import me.zhengjie.annotation.Query;
 public class NvrQueryCriteria{
 
     // 模糊
-    @Query(type = Query.Type.INNER_LIKE)
+    @Query
     private String name;
 
     // 精确
     @Query
     private String ipAddr;
-
-    // 精确
-    @Query
-    private Integer channelCount;
 }

@@ -10,7 +10,7 @@ import org.mapstruct.ReportingPolicy;
 * @author andy
 * @date 2019-10-17
 */
-@Mapper(componentModel = "spring",uses = {},unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",uses = {AlarmPolicyMapper.class,UserMapper.class},unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AlgorithmMapper extends EntityMapper<AlgorithmDTO, Algorithm> {
 
 }

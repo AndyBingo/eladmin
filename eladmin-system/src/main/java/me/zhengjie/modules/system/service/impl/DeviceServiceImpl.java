@@ -61,7 +61,11 @@ public class DeviceServiceImpl implements DeviceService {
         Optional<Device> optionalDevice = deviceRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalDevice,"Device","id",resources.getId());
         Device device = optionalDevice.get();
-        device.copy(resources);
+        device.setAlgorithms(resources.getAlgorithms());
+        device.setDeviceName(resources.getDeviceName());
+        device.setIpAddr(resources.getIpAddr());
+        device.setNvr(resources.getNvr());
+        device.setStreamAddr(resources.getStreamAddr());
         deviceRepository.save(device);
     }
 

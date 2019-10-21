@@ -61,7 +61,13 @@ public class AlgorithmServiceImpl implements AlgorithmService {
         Optional<Algorithm> optionalAlgorithm = algorithmRepository.findById(resources.getId());
         ValidationUtil.isNull( optionalAlgorithm,"Algorithm","id",resources.getId());
         Algorithm algorithm = optionalAlgorithm.get();
-        algorithm.copy(resources);
+        algorithm.setAlarmPolicy(resources.getAlarmPolicy());
+        algorithm.setDevices(resources.getDevices());
+        algorithm.setException(resources.getException());
+        algorithm.setName(resources.getName());
+        algorithm.setParams(resources.getParams());
+        algorithm.setServiceUrl(resources.getServiceUrl());
+        algorithm.setUsers(resources.getUsers());
         algorithmRepository.save(algorithm);
     }
 

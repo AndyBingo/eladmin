@@ -14,8 +14,4 @@ public class AlarmPolicyQueryCriteria{
     // 精确
     @Query
     private String name;
-
-    // 精确
-    @Query
-    private String alarmManner;
 }

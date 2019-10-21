@@ -29,14 +29,12 @@ public class EventDTO implements Serializable {
     // 设备ID
     private Long deviceId;
 
+    private DeviceDTO device;
+
     // 状态
     private String status;
 
     private String image;
 
     private String video;
-
-    private String eventType;
-
-    private String img;
 }

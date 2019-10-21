@@ -1,8 +1,11 @@
 package me.zhengjie.modules.system.service.dto;
 
 import lombok.Data;
+import me.zhengjie.modules.system.domain.AlarmPolicy;
+
 import java.sql.Timestamp;
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -30,4 +33,8 @@ public class AlgorithmDTO implements Serializable {
     private String exception;
 
     private Long alarmId;
+
+    private AlarmPolicyDTO alarmPolicy;
+
+    private Set<UserDTO> users;
 }

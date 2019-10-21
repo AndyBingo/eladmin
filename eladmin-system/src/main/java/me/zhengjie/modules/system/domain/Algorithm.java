@@ -1,5 +1,6 @@
 package me.zhengjie.modules.system.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
@@ -54,4 +55,8 @@ public class Algorithm implements Serializable {
     @ManyToMany
     @JoinTable(name = "algorithms_users", joinColumns = {@JoinColumn(name = "algorithm_id",referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")})
     private Set<User> users;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "algorithms")
+    private Set<Device> devices;
 }
