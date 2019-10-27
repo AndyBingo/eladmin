@@ -19,9 +19,9 @@ public class AuthorizationUser {
     @NotBlank
     private String password;
 
-    private String code;
-
-    private String uuid = "";
+//    private String code;
+//
+//    private String uuid = "";
 
     @Override
     public String toString() {
