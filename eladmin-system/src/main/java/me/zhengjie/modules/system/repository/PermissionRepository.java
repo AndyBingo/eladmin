@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
+ * @author andy
  * @date 2018-12-03
  */
 public interface PermissionRepository extends JpaRepository<Permission, Long>, JpaSpecificationExecutor {

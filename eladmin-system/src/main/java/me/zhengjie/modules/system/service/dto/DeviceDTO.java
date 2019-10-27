@@ -26,6 +26,8 @@ public class DeviceDTO implements Serializable {
     // IP地址
     private String ipAddr;
 
+    private String status;
+
     private Long nvrId;
 
     private NvrDTO nvr;

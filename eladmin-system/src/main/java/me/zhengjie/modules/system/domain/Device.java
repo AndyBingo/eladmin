@@ -40,6 +40,9 @@ public class Device implements Serializable {
     @Column(name = "ip_addr")
     private String ipAddr;
 
+    @Column(name = "status")
+    private String status;
+
     @OneToOne
     @JoinColumn(name = "nvr_id",nullable = false)
     private Nvr nvr;

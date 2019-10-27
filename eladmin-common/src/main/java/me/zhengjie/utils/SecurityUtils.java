@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * 获取当前登录的用户
- * @author Zheng Jie
+ * @author andy
  * @date 2019-01-17
  */
 public class SecurityUtils {

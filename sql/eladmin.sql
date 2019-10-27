@@ -16,25 +16,6 @@ Date: 2019-06-05 11:13:41
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for alipay_config
--- ----------------------------
-DROP TABLE IF EXISTS `alipay_config`;
-CREATE TABLE `alipay_config` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `app_id` varchar(255) DEFAULT NULL COMMENT '应用ID',
-  `charset` varchar(255) DEFAULT NULL COMMENT '编码',
-  `format` varchar(255) DEFAULT NULL COMMENT '类型 固定格式json',
-  `gateway_url` varchar(255) DEFAULT NULL COMMENT '网关地址',
-  `notify_url` varchar(255) DEFAULT NULL COMMENT '异步回调',
-  `private_key` text COMMENT '私钥',
-  `public_key` text COMMENT '公钥',
-  `return_url` varchar(255) DEFAULT NULL COMMENT '回调地址',
-  `sign_type` varchar(255) DEFAULT NULL COMMENT '签名方式',
-  `sys_service_provider_id` varchar(255) DEFAULT NULL COMMENT '商户号',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for dept
 -- ----------------------------
 DROP TABLE IF EXISTS `dept`;
@@ -45,21 +26,12 @@ CREATE TABLE `dept` (
   `create_time` datetime DEFAULT NULL,
   `enabled` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dept
 -- ----------------------------
-INSERT INTO `dept` VALUES ('1', 'eladmin', '0', '2019-03-25 09:14:05', '');
-INSERT INTO `dept` VALUES ('2', '研发部', '7', '2019-03-25 09:15:32', '');
-INSERT INTO `dept` VALUES ('5', '运维部', '7', '2019-03-25 09:20:44', '');
-INSERT INTO `dept` VALUES ('6', '测试部', '8', '2019-03-25 09:52:18', '');
-INSERT INTO `dept` VALUES ('7', '华南分部', '1', '2019-03-25 11:04:50', '');
-INSERT INTO `dept` VALUES ('8', '华北分部', '1', '2019-03-25 11:04:53', '');
-INSERT INTO `dept` VALUES ('9', '财务部', '7', '2019-03-25 11:05:34', '');
-INSERT INTO `dept` VALUES ('10', '行政部', '8', '2019-03-25 11:05:58', '');
-INSERT INTO `dept` VALUES ('11', '人事部', '8', '2019-03-25 11:07:58', '');
-INSERT INTO `dept` VALUES ('12', '市场部', '7', '2019-03-25 11:10:24', '\0');
+INSERT INTO `dept` VALUES ('1', '全公司', '0', '2019-03-25 09:14:05', '');
 
 -- ----------------------------
 -- Table structure for dict
@@ -70,7 +42,7 @@ CREATE TABLE `dict` (
   `name` varchar(255) NOT NULL COMMENT '字典名称',
   `remark` varchar(255) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dict
@@ -92,7 +64,7 @@ CREATE TABLE `dict_detail` (
   PRIMARY KEY (`id`),
   KEY `FK5tpkputc6d9nboxojdbgnpmyb` (`dict_id`),
   CONSTRAINT `FK5tpkputc6d9nboxojdbgnpmyb` FOREIGN KEY (`dict_id`) REFERENCES `dict` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dict_detail
@@ -116,28 +88,7 @@ CREATE TABLE `email_config` (
   `port` varchar(255) DEFAULT NULL COMMENT '端口',
   `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for gen_config
--- ----------------------------
-DROP TABLE IF EXISTS `gen_config`;
-CREATE TABLE `gen_config` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `author` varchar(255) DEFAULT NULL COMMENT '作者',
-  `cover` bit(1) DEFAULT NULL COMMENT '是否覆盖',
-  `module_name` varchar(255) DEFAULT NULL COMMENT '模块名称',
-  `pack` varchar(255) DEFAULT NULL COMMENT '至于哪个包下',
-  `path` varchar(255) DEFAULT NULL COMMENT '前端代码生成的路径',
-  `api_path` varchar(255) DEFAULT NULL,
-  `prefix` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of gen_config
--- ----------------------------
-INSERT INTO `gen_config` VALUES ('1', 'jie', '\0', 'eladmin-system', 'me.zhengjie.modules.test', 'E:\\workspace\\me\\front\\eladmin-qt\\src\\views\\test', 'E:\\workspace\\me\\front\\eladmin-qt\\src\\api', null);
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for job
@@ -153,17 +104,12 @@ CREATE TABLE `job` (
   PRIMARY KEY (`id`),
   KEY `FKmvhj0rogastlctflsxf1d6k3i` (`dept_id`),
   CONSTRAINT `FKmvhj0rogastlctflsxf1d6k3i` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of job
 -- ----------------------------
-INSERT INTO `job` VALUES ('2', '董事长秘书', '', '2019-03-29 14:01:30', '2', '1');
-INSERT INTO `job` VALUES ('8', '人事专员', '', '2019-03-29 14:52:28', '3', '11');
-INSERT INTO `job` VALUES ('10', '产品经理', '\0', '2019-03-29 14:55:51', '4', '2');
-INSERT INTO `job` VALUES ('11', '全栈开发', '', '2019-03-31 13:39:30', '6', '2');
-INSERT INTO `job` VALUES ('12', '软件测试', '', '2019-03-31 13:39:43', '5', '2');
-INSERT INTO `job` VALUES ('19', '董事长', '', '2019-03-31 14:58:15', '1', '1');
+INSERT INTO `job` VALUES ('1', '正式员工', '', '2019-03-29 14:01:30', '2', '1');
 
 -- ----------------------------
 -- Table structure for log
@@ -181,7 +127,7 @@ CREATE TABLE `log` (
   `time` bigint(20) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10334 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of log
@@ -202,7 +148,7 @@ CREATE TABLE `menu` (
   `icon` varchar(255) DEFAULT NULL COMMENT '图标',
   `path` varchar(255) DEFAULT NULL COMMENT '链接地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of menu
@@ -251,7 +197,7 @@ CREATE TABLE `permission` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `pid` int(11) NOT NULL COMMENT '上级权限',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
@@ -320,83 +266,7 @@ CREATE TABLE `picture` (
   `username` varchar(255) DEFAULT NULL COMMENT '用户名称',
   `width` varchar(255) DEFAULT NULL COMMENT '图片宽度',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for qiniu_config
--- ----------------------------
-DROP TABLE IF EXISTS `qiniu_config`;
-CREATE TABLE `qiniu_config` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `access_key` text COMMENT 'accessKey',
-  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
-  `host` varchar(255) NOT NULL COMMENT '外链域名',
-  `secret_key` text COMMENT 'secretKey',
-  `type` varchar(255) DEFAULT NULL COMMENT '空间类型',
-  `zone` varchar(255) DEFAULT NULL COMMENT '机房',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for qiniu_content
--- ----------------------------
-DROP TABLE IF EXISTS `qiniu_content`;
-CREATE TABLE `qiniu_content` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `bucket` varchar(255) DEFAULT NULL COMMENT 'Bucket 识别符',
-  `name` varchar(255) DEFAULT NULL COMMENT '文件名称',
-  `size` varchar(255) DEFAULT NULL COMMENT '文件大小',
-  `type` varchar(255) DEFAULT NULL COMMENT '文件类型：私有或公开',
-  `update_time` datetime DEFAULT NULL COMMENT '上传或同步的时间',
-  `url` varchar(255) DEFAULT NULL COMMENT '文件url',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Table structure for quartz_job
--- ----------------------------
-DROP TABLE IF EXISTS `quartz_job`;
-CREATE TABLE `quartz_job` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `bean_name` varchar(255) DEFAULT NULL COMMENT 'Spring Bean名称',
-  `cron_expression` varchar(255) DEFAULT NULL COMMENT 'cron 表达式',
-  `is_pause` bit(1) DEFAULT NULL COMMENT '状态：1暂停、0启用',
-  `job_name` varchar(255) DEFAULT NULL COMMENT '任务名称',
-  `method_name` varchar(255) DEFAULT NULL COMMENT '方法名称',
-  `params` varchar(255) DEFAULT NULL COMMENT '参数',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `update_time` datetime DEFAULT NULL COMMENT '创建或更新日期',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of quartz_job
--- ----------------------------
-INSERT INTO `quartz_job` VALUES ('1', 'visitsTask', '0 0 0 * * ?', '\0', '更新访客记录', 'run', null, '每日0点创建新的访客记录', '2019-01-08 14:53:31');
-INSERT INTO `quartz_job` VALUES ('2', 'testTask', '0/5 * * * * ?', '', '测试1', 'run1', 'test', '带参测试，多参使用json', '2019-01-13 14:20:50');
-INSERT INTO `quartz_job` VALUES ('3', 'testTask', '0/5 * * * * ?', '', '测试', 'run', '', '不带参测试', '2019-04-09 16:16:44');
-
--- ----------------------------
--- Table structure for quartz_log
--- ----------------------------
-DROP TABLE IF EXISTS `quartz_log`;
-CREATE TABLE `quartz_log` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `baen_name` varchar(255) DEFAULT NULL,
-  `create_time` datetime DEFAULT NULL,
-  `cron_expression` varchar(255) DEFAULT NULL,
-  `exception_detail` text,
-  `is_success` bit(1) DEFAULT NULL,
-  `job_name` varchar(255) DEFAULT NULL,
-  `method_name` varchar(255) DEFAULT NULL,
-  `params` varchar(255) DEFAULT NULL,
-  `time` bigint(20) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of quartz_log
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for role
@@ -410,7 +280,7 @@ CREATE TABLE `role` (
   `data_scope` varchar(255) DEFAULT NULL,
   `level` int(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role
@@ -435,11 +305,9 @@ CREATE TABLE `roles_depts` (
 -- ----------------------------
 -- Records of roles_depts
 -- ----------------------------
-INSERT INTO `roles_depts` VALUES ('2', '5');
-INSERT INTO `roles_depts` VALUES ('4', '6');
-INSERT INTO `roles_depts` VALUES ('4', '7');
-INSERT INTO `roles_depts` VALUES ('2', '8');
-
+INSERT INTO `roles_depts` VALUES ('1', '1');
+INSERT INTO `roles_depts` VALUES ('2', '1');
+INSERT INTO `roles_depts` VALUES ('4', '1');
 -- ----------------------------
 -- Table structure for roles_menus
 -- ----------------------------
@@ -567,6 +435,7 @@ CREATE TABLE `user` (
   `enabled` bigint(20) DEFAULT NULL COMMENT '状态：1启用、0禁用',
   `password` varchar(255) DEFAULT NULL COMMENT '密码',
   `username` varchar(255) DEFAULT NULL COMMENT '用户名',
+  `nickname` varchar(255) DEFAULT NULL COMMENT '昵称',
   `last_password_reset_time` datetime DEFAULT NULL COMMENT '最后修改密码的日期',
   `dept_id` bigint(20) DEFAULT NULL,
   `phone` varchar(255) DEFAULT NULL,
@@ -578,14 +447,14 @@ CREATE TABLE `user` (
   KEY `FKfftoc2abhot8f2wu6cl9a5iky` (`job_id`),
   CONSTRAINT `FK5rwmryny6jthaaxkogownknqp` FOREIGN KEY (`dept_id`) REFERENCES `dept` (`id`),
   CONSTRAINT `FKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`job_id`) REFERENCES `job` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'https://i.loli.net/2019/04/04/5ca5b971e1548.jpeg', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin', '2019-05-18 17:34:21', '2', '18888888888', '11');
-INSERT INTO `user` VALUES ('3', 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2018-12-27 20:05:26', 'test@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'test', '2019-04-01 09:15:24', '2', '17777777777', '12');
-INSERT INTO `user` VALUES ('5', 'https://aurora-1255840532.cos.ap-chengdu.myqcloud.com/8918a306ea314404835a9196585c4b75.jpeg', '2019-04-02 10:07:12', 'hr@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'hr', null, '11', '15555555555', '8');
+INSERT INTO `user` VALUES ('1', '', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin','Admin', '2019-05-18 17:34:21', '2', '18888888888', '11');
+INSERT INTO `user` VALUES ('3', '', '2018-12-27 20:05:26', 'test@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'Test','2019-04-01 09:15:24', '2', '17777777777', '12');
+INSERT INTO `user` VALUES ('5', '', '2019-04-02 10:07:12', 'hr@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'hr', 'HR',null, '11', '15555555555', '8');
 
 -- ----------------------------
 -- Table structure for users_roles
@@ -626,20 +495,6 @@ CREATE TABLE `verification_code` (
 -- Records of verification_code
 -- ----------------------------
 
--- ----------------------------
--- Table structure for visits
--- ----------------------------
-DROP TABLE IF EXISTS `visits`;
-CREATE TABLE `visits` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `create_time` datetime DEFAULT NULL,
-  `date` varchar(255) DEFAULT NULL,
-  `ip_counts` bigint(20) DEFAULT NULL,
-  `pv_counts` bigint(20) DEFAULT NULL,
-  `week_day` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_11aksgq87euk9bcyeesfs4vtp` (`date`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 ------------------------------
 -- Table structure for event
@@ -650,13 +505,14 @@ CREATE TABLE `event` (
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
-  `exception` varchar(255) DEFAULT NULL,
+  `algorithm_id` bigint(20) DEFAULT NULL,
   `device_id` bigint(20) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `video` varchar(255) DEFAULT NULL,
   PRIMARY KEY(`id`),
-  CONSTRAINT `eventFKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`)
+  CONSTRAINT `eventFKfftoc2abhot8f2wu6cl9a` FOREIGN KEY (`device_id`) REFERENCES `device` (`id`),
+  CONSTRAINT `algorithmFKfftoc2abhot8f2wu6cl9a5i` FOREIGN KEY (`algorithm_id`) REFERENCES `algorithm` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 -----------------------------
 -- Schema of nvr table
@@ -682,6 +538,7 @@ CREATE TABLE `device` (
   `device_name` varchar (255) DEFAULT NULL,
   `stream_addr` varchar(255) DEFAULT NULL,
   `ip_addr` varchar(50) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   `nvr_id` bigint(20) NOT NULL,
   PRIMARY KEY(`id`),
   CONSTRAINT `deviceFKfftoc2abhot8f2wu6cl9a5iky` FOREIGN KEY (`nvr_id`) REFERENCES `nvr` (`id`)

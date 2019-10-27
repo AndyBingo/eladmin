@@ -5,7 +5,7 @@ import me.zhengjie.domain.vo.ColumnInfo;
 import java.util.List;
 
 /**
- * @author Zheng Jie
+ * @author andy
  * @date 2019-01-02
  */
 public interface GeneratorService {

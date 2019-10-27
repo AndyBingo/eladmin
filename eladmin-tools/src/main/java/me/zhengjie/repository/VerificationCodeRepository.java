@@ -4,7 +4,7 @@ import me.zhengjie.domain.VerificationCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
- * @author Zheng Jie
+ * @author andy
  * @date 2018-12-26
  */
 public interface VerificationCodeRepository extends JpaRepository<VerificationCode, Long> {

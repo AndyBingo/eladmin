@@ -33,9 +33,9 @@ public class Event implements Serializable {
     @Column(name = "create_time")
     private Timestamp createTime;
 
-    // 异常类型
-    @Column(name = "exception")
-    private String exception;
+    @OneToOne
+    @JoinColumn(name = "algorithm_id")
+    private Algorithm algorithm;
 
     // 设备ID
     @OneToOne

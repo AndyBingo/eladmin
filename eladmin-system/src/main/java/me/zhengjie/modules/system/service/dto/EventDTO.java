@@ -23,8 +23,10 @@ public class EventDTO implements Serializable {
     // 创建时间
     private Timestamp createTime;
 
-    // 异常类型
-    private String exception;
+    // 设备ID
+    private Long algorithmId;
+
+    private AlgorithmDTO algorithm;
 
     // 设备ID
     private Long deviceId;

@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 /**
  * 代码生成配置
- * @author Zheng Jie
+ * @author andy
  * @date 2019-01-03
  */
 @Data

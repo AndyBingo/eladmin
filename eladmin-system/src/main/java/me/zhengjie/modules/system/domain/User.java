@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.Set;
 
 /**
- * @author Zheng Jie
+ * @author andy
  * @date 2018-11-22
  */
 @Entity
@@ -30,6 +30,8 @@ public class User implements Serializable {
     @NotBlank
     @Column(unique = true)
     private String username;
+
+    private String nickname;
 
     private String avatar;
 

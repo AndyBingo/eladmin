@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
 /**
- * @author Zheng Jie
+ * @author andy
  * @date 2019-01-14
  */
 @CacheConfig(cacheNames = "genConfig")

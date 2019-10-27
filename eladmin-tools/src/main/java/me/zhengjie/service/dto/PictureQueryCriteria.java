@@ -6,7 +6,7 @@ import me.zhengjie.annotation.Query;
 /**
  * sm.ms图床
  *
- * @author Zheng Jie
+ * @author andy
  * @date 2019-6-4 09:52:09
  */
 @Data
