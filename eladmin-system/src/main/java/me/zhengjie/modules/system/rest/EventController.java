@@ -1,6 +1,7 @@
 package me.zhengjie.modules.system.rest;
 
 import me.zhengjie.aop.log.Log;
+import me.zhengjie.modules.quartz.service.QuartzJobService;
 import me.zhengjie.modules.system.domain.Event;
 import me.zhengjie.modules.system.service.EventService;
 import me.zhengjie.modules.system.service.dto.EventQueryCriteria;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +27,23 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private QuartzJobService quartzJobService;
+
     @Log("查询Event")
     @ApiOperation(value = "查询Event")
     @GetMapping(value = "/event")
     @PreAuthorize("hasAnyRole('ADMIN','EVENT_ALL','EVENT_SELECT')")
     public ResponseEntity getEvents(EventQueryCriteria criteria, Pageable pageable){
         return new ResponseEntity(eventService.queryAll(criteria,pageable),HttpStatus.OK);
+    }
+
+    @Log("查询选定时间内的事件聚合")
+    @ApiOperation(value = "查询选定时间内的事件聚合")
+    @GetMapping(value = "/event/agg")
+    @PreAuthorize("hasAnyRole('ADMIN','EVENT_ALL','EVENT_SELECT')")
+    public ResponseEntity getEventsAgg(String start, String end){
+        return new ResponseEntity(eventService.queryAllByStartTimeAndEndTimeGroupByException(start, end), HttpStatus.OK);
     }
 
     @Log("新增Event")

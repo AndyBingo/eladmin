@@ -3,3 +3,5 @@
 *.iml
 */target/*
 */*.iml
+.DS_Store
+*.DS_Store

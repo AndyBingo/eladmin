@@ -269,6 +269,49 @@ CREATE TABLE `picture` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Table structure for quartz_job
+-- ----------------------------
+DROP TABLE IF EXISTS `quartz_job`;
+CREATE TABLE `quartz_job`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `bean_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Spring Bean名称',
+  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'cron 表达式',
+  `is_pause` bit(1) NULL DEFAULT NULL COMMENT '状态：1暂停、0启用',
+  `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务名称',
+  `method_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '方法名称',
+  `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数',
+  `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '创建或更新日期',
+  `count` int DEFAULT 0,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `job_name` (`job_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of quartz_job
+-- ----------------------------
+INSERT INTO `quartz_job` VALUES (1, 'testTask', '0/5 * * * * ?', b'0', '更新访客记录', 'run', NULL, '每日0点创建新的访客记录', '2019-01-08 14:53:31');
+
+-- ----------------------------
+-- Table structure for quartz_log
+-- ----------------------------
+DROP TABLE IF EXISTS `quartz_log`;
+CREATE TABLE `quartz_log`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `baen_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
+  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `exception_detail` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `is_success` bit(1) NULL DEFAULT NULL,
+  `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `method_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `time` bigint(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -452,9 +495,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin','Admin', '2019-05-18 17:34:21', '2', '18888888888', '11');
-INSERT INTO `user` VALUES ('3', '', '2018-12-27 20:05:26', 'test@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'Test','2019-04-01 09:15:24', '2', '17777777777', '12');
-INSERT INTO `user` VALUES ('5', '', '2019-04-02 10:07:12', 'hr@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'hr', 'HR',null, '11', '15555555555', '8');
+INSERT INTO `user` VALUES ('1', '', '2018-08-23 09:11:56', 'admin@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'admin','Admin', '2019-05-18 17:34:21', '1', '18888888888', '1');
+INSERT INTO `user` VALUES ('3', '', '2018-12-27 20:05:26', 'test@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'test', 'Test','2019-04-01 09:15:24', '1', '17777777777', '1');
+INSERT INTO `user` VALUES ('5', '', '2019-04-02 10:07:12', 'hr@eladmin.net', '1', 'e10adc3949ba59abbe56e057f20f883e', 'hr', 'HR',null, '11', '15555555555', '1');
 
 -- ----------------------------
 -- Table structure for users_roles

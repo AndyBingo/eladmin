@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +53,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Map<String, Object>> queryAllByStartTimeAndEndTimeGroupByException(String start, String end){
+        return eventRepository.queryAllByStartTimeAndEndTimeGroupByException(start, end);
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public EventDTO create(Event resources) {
         resources.setStatus("未关闭");
@@ -70,5 +78,11 @@ public class EventServiceImpl implements EventService {
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
         eventRepository.deleteById(id);
+    }
+
+
+    @Override
+    public void manageEventAlarmJob(Event resources){
+
     }
 }

@@ -21,7 +21,7 @@ public class EventQueryCriteria{
 
     // 精确
     @Query
-    private String exception;
+    private Long algorithmId;
 
     // 精确
     @Query

@@ -7,6 +7,10 @@ import me.zhengjie.modules.system.service.dto.EventQueryCriteria;
 //import org.springframework.cache.annotation.CacheEvict;
 //import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author andy
@@ -41,6 +45,14 @@ public interface EventService {
     EventDTO findById(Long id);
 
     /**
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Map<String, Object>> queryAllByStartTimeAndEndTimeGroupByException(String start, String end);
+
+    /**
      * create
      * @param resources
      * @return
@@ -61,4 +73,7 @@ public interface EventService {
      */
     //@CacheEvict(allEntries = true)
     void delete(Long id);
+
+    @Async
+    void manageEventAlarmJob(Event resources);
 }
