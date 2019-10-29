@@ -4,6 +4,7 @@ import me.zhengjie.aop.log.Log;
 import me.zhengjie.modules.quartz.service.QuartzJobService;
 import me.zhengjie.modules.system.domain.Event;
 import me.zhengjie.modules.system.service.EventService;
+import me.zhengjie.modules.system.service.dto.EventDTO;
 import me.zhengjie.modules.system.service.dto.EventQueryCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,9 @@ public class EventController {
     @PostMapping(value = "/event")
     @PreAuthorize("hasAnyRole('ADMIN','EVENT_ALL','EVENT_CREATE')")
     public ResponseEntity create(@Validated @RequestBody Event resources){
-        return new ResponseEntity(eventService.create(resources),HttpStatus.CREATED);
+        EventDTO eventDTO = eventService.create(resources);
+        eventService.manageEventAlarmJob(resources);
+        return new ResponseEntity(eventDTO,HttpStatus.CREATED);
     }
 
     @Log("修改Event")

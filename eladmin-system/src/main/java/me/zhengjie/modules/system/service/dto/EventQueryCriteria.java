@@ -27,7 +27,6 @@ public class EventQueryCriteria{
     @Query
     private Long deviceId;
 
-    // 精确
     @Query
-    private String status;
+    private Boolean isClosed;
 }

@@ -4,6 +4,7 @@ import lombok.Data;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 import java.io.Serializable;
 
@@ -42,9 +43,12 @@ public class Event implements Serializable {
     @JoinColumn(name = "device_id")
     private Device device;
 
-    // 状态
-    @Column(name = "status")
-    private String status;
+    /**
+     * 状态
+     */
+    @Column(name = "is_closed",nullable = false)
+    @NotNull
+    private Boolean isClosed;
 
     @Column(name = "image")
     private String image;

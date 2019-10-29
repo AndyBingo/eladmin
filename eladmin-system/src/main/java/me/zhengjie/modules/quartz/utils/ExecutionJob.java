@@ -42,7 +42,7 @@ public class ExecutionJob extends QuartzJobBean {
         log.setMethodName(quartzJob.getMethodName());
         log.setParams(quartzJob.getParams());
         long startTime = System.currentTimeMillis();
-        log.setCronExpression(quartzJob.getCronExpression());
+        log.setCronExpression(quartzJob.getIntervalSec()+"");
         try {
             // 执行任务
             logger.info("任务准备执行，任务名称：{}", quartzJob.getJobName());

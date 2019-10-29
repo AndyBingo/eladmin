@@ -4,11 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import me.zhengjie.exception.BadRequestException;
 import me.zhengjie.modules.quartz.domain.QuartzJob;
 import org.quartz.*;
-import org.quartz.impl.triggers.CronTriggerImpl;
+import org.quartz.impl.triggers.SimpleTriggerImpl;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Date;
 import static org.quartz.TriggerBuilder.newTrigger;
+import static org.quartz.SimpleScheduleBuilder.*;
 
 /**
  * @author Zheng Jie
@@ -29,20 +30,18 @@ public class QuartzManage {
             JobDetail jobDetail = JobBuilder.newJob(ExecutionJob.class).
                     withIdentity(JOB_NAME + quartzJob.getId()).build();
 
-            //通过触发器名和cron 表达式创建 Trigger
-            Trigger cronTrigger = newTrigger()
+            SimpleTrigger trigger = newTrigger()
                     .withIdentity(JOB_NAME + quartzJob.getId())
                     .startNow()
-                    .withSchedule(CronScheduleBuilder.cronSchedule(quartzJob.getCronExpression()))
+                    .withSchedule(simpleSchedule().withIntervalInSeconds(quartzJob.getIntervalSec()).repeatForever())
                     .build();
 
-            cronTrigger.getJobDataMap().put(QuartzJob.JOB_KEY, quartzJob);
-
-            //重置启动时间
-            ((CronTriggerImpl)cronTrigger).setStartTime(new Date());
+                    //重置启动时间
+            ((SimpleTriggerImpl)trigger).setStartTime(new Date());
+            trigger.getJobDataMap().put(QuartzJob.JOB_KEY,quartzJob);
 
             //执行定时任务
-            scheduler.scheduleJob(jobDetail,cronTrigger);
+            scheduler.scheduleJob(jobDetail,trigger);
 
             // 暂停任务
             if (quartzJob.getIsPause()) {
@@ -59,19 +58,20 @@ public class QuartzManage {
      * @param quartzJob
      * @throws SchedulerException
      */
-    public void updateJobCron(QuartzJob quartzJob){
+    public void updateJobInterval(QuartzJob quartzJob){
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
-            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+            SimpleTrigger trigger = (SimpleTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if(trigger == null){
                 addJob(quartzJob);
-                trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+                trigger = (SimpleTrigger) scheduler.getTrigger(triggerKey);
             }
-            CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(quartzJob.getCronExpression());
-            trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+
+            SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule().repeatSecondlyForever(quartzJob.getIntervalSec());
             //重置启动时间
-            ((CronTriggerImpl)trigger).setStartTime(new Date());
+            trigger = trigger.getTriggerBuilder().withIdentity(triggerKey).withSchedule(scheduleBuilder).build();
+            ((SimpleTriggerImpl)trigger).setStartTime(new Date());
             trigger.getJobDataMap().put(QuartzJob.JOB_KEY,quartzJob);
 
             scheduler.rescheduleJob(triggerKey, trigger);
@@ -110,7 +110,7 @@ public class QuartzManage {
     public void resumeJob(QuartzJob quartzJob){
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
-            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+            SimpleTrigger trigger = (SimpleTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if(trigger == null)
                 addJob(quartzJob);
@@ -130,7 +130,7 @@ public class QuartzManage {
     public void runAJobNow(QuartzJob quartzJob){
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(JOB_NAME + quartzJob.getId());
-            CronTrigger trigger = (CronTrigger) scheduler.getTrigger(triggerKey);
+            SimpleTrigger trigger = (SimpleTrigger) scheduler.getTrigger(triggerKey);
             // 如果不存在则创建一个定时任务
             if(trigger == null)
                 addJob(quartzJob);

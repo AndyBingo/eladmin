@@ -50,6 +50,7 @@ CREATE TABLE `dict` (
 INSERT INTO `dict` VALUES ('1', 'user_status', '用户状态');
 INSERT INTO `dict` VALUES ('4', 'dept_status', '部门状态');
 INSERT INTO `dict` VALUES ('5', 'job_status', '岗位状态');
+INSERT INTO `dict` VALUES ('6', 'event_status','事件状态');
 
 -- ----------------------------
 -- Table structure for dict_detail
@@ -75,6 +76,8 @@ INSERT INTO `dict_detail` VALUES ('11', '正常', 'true', '1', '4');
 INSERT INTO `dict_detail` VALUES ('12', '停用', 'false', '2', '4');
 INSERT INTO `dict_detail` VALUES ('13', '正常', 'true', '1', '5');
 INSERT INTO `dict_detail` VALUES ('14', '停用', 'false', '2', '5');
+INSERT INTO `dict_detail` VALUES ('15', '未处理'，'false'，'1'，'6');
+INSERT INTO `dict_detail` VALUES ('16', '已关闭'，'true'，'2'，'6');
 
 -- ----------------------------
 -- Table structure for email_config
@@ -275,7 +278,7 @@ DROP TABLE IF EXISTS `quartz_job`;
 CREATE TABLE `quartz_job`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `bean_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Spring Bean名称',
-  `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'cron 表达式',
+  `interval_sec` int NULL DEFAULT NULL,
   `is_pause` bit(1) NULL DEFAULT NULL COMMENT '状态：1暂停、0启用',
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务名称',
   `method_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '方法名称',
@@ -290,7 +293,7 @@ CREATE TABLE `quartz_job`  (
 -- ----------------------------
 -- Records of quartz_job
 -- ----------------------------
-INSERT INTO `quartz_job` VALUES (1, 'testTask', '0/5 * * * * ?', b'0', '更新访客记录', 'run', NULL, '每日0点创建新的访客记录', '2019-01-08 14:53:31');
+INSERT INTO `quartz_job` VALUES (1, 'testTask', 5, b'0', '更新访客记录', 'run', NULL, '每日0点创建新的访客记录', '2019-01-08 14:53:31',0);
 
 -- ----------------------------
 -- Table structure for quartz_log
@@ -550,7 +553,7 @@ CREATE TABLE `event` (
   `create_time` datetime DEFAULT NULL,
   `algorithm_id` bigint(20) DEFAULT NULL,
   `device_id` bigint(20) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
+  `is_closed` bit(1) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `video` varchar(255) DEFAULT NULL,
   PRIMARY KEY(`id`),

@@ -54,9 +54,9 @@ public class QuartzJob implements Serializable {
     /**
      * cron表达式
      */
-    @Column(name = "cron_expression")
+    @Column(name = "interval_sec")
     @NotBlank
-    private String cronExpression;
+    private Integer intervalSec;
 
     /**
      * 状态

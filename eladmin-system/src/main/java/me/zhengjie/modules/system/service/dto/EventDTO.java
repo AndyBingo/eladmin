@@ -33,8 +33,10 @@ public class EventDTO implements Serializable {
 
     private DeviceDTO device;
 
-    // 状态
-    private String status;
+    /**
+     * 状态
+     */
+    private Boolean isClosed;
 
     private String image;
 
