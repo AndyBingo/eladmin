@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestTask {
 
-    public void run(){
-        log.info("执行成功");
+    public void run(String params){
+        log.info("执行成功" + "  " + params);
     }
 
     public void run1(String str){

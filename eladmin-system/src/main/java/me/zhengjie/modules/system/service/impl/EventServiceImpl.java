@@ -7,17 +7,20 @@ import me.zhengjie.modules.system.service.AlgorithmService;
 import me.zhengjie.modules.system.service.DeviceService;
 import me.zhengjie.modules.system.service.dto.AlgorithmDTO;
 import me.zhengjie.modules.system.service.dto.DeviceDTO;
+import me.zhengjie.utils.StringUtils;
 import me.zhengjie.utils.ValidationUtil;
 import me.zhengjie.modules.system.repository.EventRepository;
 import me.zhengjie.modules.system.service.EventService;
 import me.zhengjie.modules.system.service.dto.EventDTO;
 import me.zhengjie.modules.system.service.dto.EventQueryCriteria;
 import me.zhengjie.modules.system.service.mapper.EventMapper;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -76,7 +79,9 @@ public class EventServiceImpl implements EventService {
     @Transactional(rollbackFor = Exception.class)
     public EventDTO create(Event resources) {
         resources.setIsClosed(false);
-        return eventMapper.toDto(eventRepository.save(resources));
+        Event event = eventRepository.save(resources);
+        manageEventAlarmJob(event);
+        return eventMapper.toDto(event);
     }
 
     @Override
@@ -87,39 +92,44 @@ public class EventServiceImpl implements EventService {
         Event event = optionalEvent.get();
         event.setIsClosed(resources.getIsClosed());
         eventRepository.save(event);
+        manageEventAlarmJob(event);
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void delete(Long id) {
+        EventDTO event = findById(id);
         eventRepository.deleteById(id);
+        manageEventAlarmJob(eventMapper.toEntity(event));
     }
 
 
     @Override
-    @Transactional
     public void manageEventAlarmJob(Event resources){
         Long algorithmId = resources.getAlgorithm().getId();
         Long deviceId = resources.getDevice().getId();
         AlgorithmDTO algorithmDTO = algorithmService.findById(algorithmId);
-        String exception = algorithmDTO.getException();
         DeviceDTO deviceDTO = deviceService.findById(deviceId);
 
+        if (algorithmDTO == null || deviceDTO == null){
+            return;
+        }
+
         int count = eventRepository.countEventsByDeviceIdAndAlgorithmIdAndIsClosed(deviceId,algorithmId);
+        String jobName = deviceDTO.getDeviceName()+algorithmDTO.getName();
+        QuartzJob quartzJob = quartzJobService.findByJobName(jobName);
         if (count > 0) {
-            String jobName = deviceDTO.getDeviceName()+algorithmDTO.getName();
-            QuartzJob quartzJob = quartzJobService.findByJobName(jobName);
             if (quartzJob == null) {
                 quartzJob = new QuartzJob();
                 quartzJob.setIntervalSec(algorithmDTO.getAlarmPolicy().getAlarmInterval());
                 quartzJob.setJobName(jobName);
+                quartzJob.setParams(String.valueOf(deviceId).concat(",").concat(String.valueOf(algorithmId)));
                 quartzJobService.create(quartzJob);
             }
         }else if (count == 0){
-
+            if (quartzJob != null) {
+                quartzJobService.delete(quartzJob);
+            }
         }
-
-
-
     }
 }

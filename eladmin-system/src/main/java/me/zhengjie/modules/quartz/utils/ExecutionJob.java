@@ -47,7 +47,7 @@ public class ExecutionJob extends QuartzJobBean {
             // 执行任务
             logger.info("任务准备执行，任务名称：{}", quartzJob.getJobName());
             QuartzRunnable task = new QuartzRunnable(quartzJob.getBeanName(), quartzJob.getMethodName(),
-                    quartzJob.getParams());
+                    quartzJob.getParams().concat(",").concat(String.valueOf(quartzJob.getCount())));
             Future<?> future = executorService.submit(task);
             future.get();
             long times = System.currentTimeMillis() - startTime;

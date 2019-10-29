@@ -76,8 +76,8 @@ INSERT INTO `dict_detail` VALUES ('11', '正常', 'true', '1', '4');
 INSERT INTO `dict_detail` VALUES ('12', '停用', 'false', '2', '4');
 INSERT INTO `dict_detail` VALUES ('13', '正常', 'true', '1', '5');
 INSERT INTO `dict_detail` VALUES ('14', '停用', 'false', '2', '5');
-INSERT INTO `dict_detail` VALUES ('15', '未处理'，'false'，'1'，'6');
-INSERT INTO `dict_detail` VALUES ('16', '已关闭'，'true'，'2'，'6');
+INSERT INTO `dict_detail` VALUES ('15', '未处理','false','1','6');
+INSERT INTO `dict_detail` VALUES ('16', '已关闭','true','2','6');
 
 -- ----------------------------
 -- Table structure for email_config
