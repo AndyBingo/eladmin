@@ -18,19 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.mine</groupId>
-            <artifactId>eladmin-generator</artifactId>
-            <version>0.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>cn.mine</groupId>
-                    <artifactId>eladmin-common</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.mine</groupId>
-            <artifactId>eladmin-tools</artifactId>
+            <artifactId>eladmin-logging</artifactId>
             <version>0.1</version>
         </dependency>
 

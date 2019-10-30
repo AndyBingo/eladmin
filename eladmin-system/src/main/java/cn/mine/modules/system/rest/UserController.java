@@ -2,8 +2,6 @@ package cn.mine.modules.system.rest;
 
 import cn.mine.aop.log.Log;
 import cn.mine.config.DataScope;
-import cn.mine.domain.Picture;
-import cn.mine.domain.VerificationCode;
 import cn.mine.modules.system.domain.User;
 import cn.mine.exception.BadRequestException;
 import cn.mine.modules.system.domain.vo.UserPassVo;
@@ -11,8 +9,6 @@ import cn.mine.modules.system.service.DeptService;
 import cn.mine.modules.system.service.RoleService;
 import cn.mine.modules.system.service.dto.RoleSmallDTO;
 import cn.mine.modules.system.service.dto.UserQueryCriteria;
-import cn.mine.service.PictureService;
-import cn.mine.service.VerificationCodeService;
 import cn.mine.utils.*;
 import cn.mine.modules.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +21,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,9 +36,6 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private PictureService pictureService;
-
-    @Autowired
     private DataScope dataScope;
 
     @Autowired
@@ -51,9 +43,6 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
-
-    @Autowired
-    private VerificationCodeService verificationCodeService;
 
     @Log("查询用户")
     @GetMapping(value = "/users")
@@ -145,12 +134,11 @@ public class UserController {
      * @param file
      * @return
      */
-    @PostMapping(value = "/users/updateAvatar")
-    public ResponseEntity updateAvatar(@RequestParam MultipartFile file){
-        Picture picture = pictureService.upload(file, SecurityUtils.getUsername());
-        userService.updateAvatar(SecurityUtils.getUsername(),picture.getUrl());
-        return new ResponseEntity(HttpStatus.OK);
-    }
+//    @PostMapping(value = "/users/updateAvatar")
+//    public ResponseEntity updateAvatar(@RequestParam MultipartFile file){
+//        userService.updateAvatar(SecurityUtils.getUsername(),picture.getUrl());
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
 
     /**
      * 修改邮箱
@@ -165,8 +153,6 @@ public class UserController {
         if(!userDetails.getPassword().equals(EncryptUtils.encryptPassword(user.getPassword()))){
             throw new BadRequestException("密码错误");
         }
-        VerificationCode verificationCode = new VerificationCode(code, ElAdminConstant.RESET_MAIL,"email",user.getEmail());
-        verificationCodeService.validated(verificationCode);
         userService.updateEmail(userDetails.getUsername(),user.getEmail());
         return new ResponseEntity(HttpStatus.OK);
     }

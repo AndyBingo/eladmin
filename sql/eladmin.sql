@@ -80,20 +80,6 @@ INSERT INTO `dict_detail` VALUES ('15', '未处理','false','1','6');
 INSERT INTO `dict_detail` VALUES ('16', '已关闭','true','2','6');
 
 -- ----------------------------
--- Table structure for email_config
--- ----------------------------
-DROP TABLE IF EXISTS `email_config`;
-CREATE TABLE `email_config` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `from_user` varchar(255) DEFAULT NULL COMMENT '收件人',
-  `host` varchar(255) DEFAULT NULL COMMENT '邮件服务器SMTP地址',
-  `pass` varchar(255) DEFAULT NULL COMMENT '密码',
-  `port` varchar(255) DEFAULT NULL COMMENT '端口',
-  `user` varchar(255) DEFAULT NULL COMMENT '发件者用户名',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for job
 -- ----------------------------
 DROP TABLE IF EXISTS `job`;
@@ -253,23 +239,6 @@ INSERT INTO `permission` VALUES ('51', '字典查询', '2019-04-10 16:25:16', 'D
 INSERT INTO `permission` VALUES ('52', '字典创建', '2019-04-10 16:25:29', 'DICT_CREATE', '50');
 INSERT INTO `permission` VALUES ('53', '字典编辑', '2019-04-10 16:27:19', 'DICT_EDIT', '50');
 INSERT INTO `permission` VALUES ('54', '字典删除', '2019-04-10 16:27:30', 'DICT_DELETE', '50');
-
--- ----------------------------
--- Table structure for picture
--- ----------------------------
-DROP TABLE IF EXISTS `picture`;
-CREATE TABLE `picture` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `create_time` datetime DEFAULT NULL COMMENT '上传日期',
-  `delete_url` varchar(255) DEFAULT NULL COMMENT '删除的URL',
-  `filename` varchar(255) DEFAULT NULL COMMENT '图片名称',
-  `height` varchar(255) DEFAULT NULL COMMENT '图片高度',
-  `size` varchar(255) DEFAULT NULL COMMENT '图片大小',
-  `url` varchar(255) DEFAULT NULL COMMENT '图片地址',
-  `username` varchar(255) DEFAULT NULL COMMENT '用户名称',
-  `width` varchar(255) DEFAULT NULL COMMENT '图片宽度',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for quartz_job
@@ -521,21 +490,6 @@ CREATE TABLE `users_roles` (
 INSERT INTO `users_roles` VALUES ('1', '1');
 INSERT INTO `users_roles` VALUES ('3', '2');
 INSERT INTO `users_roles` VALUES ('5', '4');
-
--- ----------------------------
--- Table structure for verification_code
--- ----------------------------
-DROP TABLE IF EXISTS `verification_code`;
-CREATE TABLE `verification_code` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `code` varchar(255) DEFAULT NULL COMMENT '验证码',
-  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
-  `status` bit(1) DEFAULT NULL COMMENT '状态：1有效、0过期',
-  `type` varchar(255) DEFAULT NULL COMMENT '验证码类型：email或者短信',
-  `value` varchar(255) DEFAULT NULL COMMENT '接收邮箱或者手机号码',
-  `scenes` varchar(255) DEFAULT NULL COMMENT '业务名称：如重置邮箱、重置密码等',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of verification_code
