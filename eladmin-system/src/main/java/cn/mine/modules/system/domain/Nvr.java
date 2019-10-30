@@ -3,6 +3,7 @@ package cn.mine.modules.system.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
@@ -21,14 +22,17 @@ public class Nvr implements Serializable {
 
     // NVR名称
     @Column(name = "name")
+    @NotBlank
     private String name;
 
     // IP地址
     @Column(name = "ip_addr")
+    @NotBlank
     private String ipAddr;
 
     // 端口
     @Column(name = "port")
+    @NotBlank
     private String port;
 
     @Column(name = "user_name")

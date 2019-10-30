@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.AdaptableJobFactory;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
+import com.aliyuncs.IAcsClient;
+import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.profile.DefaultProfile;
 
 /**
  * 定时任务配置
@@ -51,5 +54,13 @@ public class QuartzConfig {
 		Scheduler scheduler=factoryBean.getScheduler();
 		scheduler.start();
 		return scheduler;
+	}
+
+	@Bean
+	public IAcsClient iAcsClient() {
+		DefaultProfile profile =
+				DefaultProfile.getProfile("cn-hangzhou", "LTAI4FpheMztrj2utFfHoMqe", "ZnM4xqrW8wdlRrMvrML5eyTd5OARsH");
+		IAcsClient client = new DefaultAcsClient(profile);
+		return client;
 	}
 }

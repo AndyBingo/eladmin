@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Timestamp;
 import java.io.Serializable;
 import java.util.Set;
@@ -28,14 +29,17 @@ public class Device implements Serializable {
 
     // 设备名称
     @Column(name = "device_name")
+    @NotBlank
     private String deviceName;
 
     // 流地址
     @Column(name = "stream_addr")
+    @NotBlank
     private String streamAddr;
 
     // IP地址
     @Column(name = "ip_addr")
+    @NotBlank
     private String ipAddr;
 
     @Column(name = "status")

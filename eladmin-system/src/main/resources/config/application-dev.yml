@@ -60,3 +60,16 @@ generator:
 #是否开启 swagger-ui
 swagger:
   enabled: true
+
+#报警短信服务参数
+aliyun:
+  sms:
+    domain: dysmsapi.aliyuncs.com
+    version: 2017-05-25
+    action: SendSms
+    acceesskey: LTAI4FpheMztrj2utFfHoMqe
+    secret: ZnM4xqrW8wdlRrMvrML5eyTd5OARsH
+    param:
+      region: cn-hangzhou
+      sign: 巧子科技
+      template: SMS_152510744

@@ -277,7 +277,7 @@ CREATE TABLE `picture` (
 DROP TABLE IF EXISTS `quartz_job`;
 CREATE TABLE `quartz_job`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `bean_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'Spring Bean名称',
+  `bean_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_cLocalContainerEntityManagerFactoryBeani NULL DEFAULT NULL COMMENT 'Spring Bean名称',
   `interval_sec` int NULL DEFAULT NULL,
   `is_pause` bit(1) NULL DEFAULT NULL COMMENT '状态：1暂停、0启用',
   `job_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '任务名称',
@@ -293,7 +293,7 @@ CREATE TABLE `quartz_job`  (
 -- ----------------------------
 -- Records of quartz_job
 -- ----------------------------
-INSERT INTO `quartz_job` VALUES (1, 'testTask', 5, b'0', '更新访客记录', 'run', NULL, '每日0点创建新的访客记录', '2019-01-08 14:53:31',0);
+INSERT INTO `quartz_job` VALUES (1, 'testTask', 5, b'0', '更新访客记录', 'run', '1,2', '每日0点创建新的访客记录', '2019-01-08 14:53:31',0);
 
 -- ----------------------------
 -- Table structure for quartz_log
